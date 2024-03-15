@@ -118,6 +118,14 @@ const config: HardhatUserConfig = {
       url: "https://sepolia.publicgoods.network",
       accounts: [deployerPrivateKey],
     },
+    chiliz: {
+      url: "https://rpc.ankr.com/chiliz",
+      accounts: [deployerPrivateKey],
+    },
+    chiliztest: {
+      url: "https://spicy-rpc.chiliz.com/",
+      accounts: [deployerPrivateKey],
+    },
   },
   // configuration for harhdat-verify plugin
   etherscan: {
