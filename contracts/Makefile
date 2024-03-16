@@ -1,0 +1,2 @@
+build-evm:
+	forge build
