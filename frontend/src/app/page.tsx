@@ -1,6 +1,28 @@
 import Image from "next/image";
+import React, { useState } from "react";
+import { fetchTokenSymbols } from '../../reader/reader';
 
 export default function Home() {
+  const [walletAddress, setWalletAddress] = useState("");
+  const [symbols, setSymbols] = useState<string[]>([]);
+  const [error, setError] = useState("");
+
+  const handleFetchClick = async () => {
+    if (!walletAddress) {
+      alert("Please enter a wallet address.");
+      return;
+    }
+    try {
+      const fetchedSymbols = await fetchTokenSymbols(walletAddress);
+      setSymbols(fetchedSymbols);
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch token symbols. Please try again.");
+      setSymbols([]);
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -108,6 +130,30 @@ export default function Home() {
           </p>
         </a>
       </div>
+
+      <div className="my-4">
+        <input
+          type="text"
+          value={walletAddress}
+          onChange={(e) => setWalletAddress(e.target.value)}
+          placeholder="Enter Wallet Address"
+          className="border-2 border-gray-300 rounded-lg p-2"
+        />
+        <button
+          onClick={handleFetchClick}
+          className="ml-2 border-2 border-blue-500 rounded-lg p-2 bg-blue-500 text-white"
+        >
+          Fetch Tokens
+        </button>
+      </div>
+      
+      {error && <p className="text-red-500">{error}</p>}
+      
+      <ul>
+        {symbols.map((symbol, index) => (
+          <li key={index}>{symbol}</li>
+        ))}
+      </ul>
     </main>
   );
 }
