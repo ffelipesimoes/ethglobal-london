@@ -132,7 +132,7 @@ contract FanBallot {
 		proposalName_ = proposals[index].name;
 	}
 
-
+//test
 
     // Calls winningProposal() function to get the index
     // of the winner contained in the proposals array and then
