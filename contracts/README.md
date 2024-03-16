@@ -16,7 +16,7 @@ $ forge test
 
 ### Deploy
 ### change rpc url to https://rpc.ankr.com/chiliz for mainnet
-## constructor-args are optional if the smart contract constructor expets arguments
+### constructor-args are optional if the smart contract constructor expets arguments
 
 ```shell
 $ forge create 
