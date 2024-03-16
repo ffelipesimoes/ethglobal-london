@@ -98,7 +98,9 @@ contract FanBallot {
         // If `proposal` is out of the range of the array,
         // this will throw automatically and revert all
         // changes.
-        proposals[proposal].voteCount += sender.weight;
+
+		// TODO: Add more weight if they hold more tokens
+        proposals[proposal].voteCount += 1;
     }
 
 
