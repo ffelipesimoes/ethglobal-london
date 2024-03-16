@@ -6,8 +6,38 @@ import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
+import { useContractRead,usePrepareContractWrite, useContractWrite  } from "wagmi"
+import { useScaffoldContractRead , useScaffoldContract} from "~~/hooks/scaffold-eth";
+
+
 const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+  const { address: connectedAddress } = useAccount({
+
+  }  
+  );
+
+  const { data: totalCounter } = useScaffoldContractRead({
+    contractName: "FanBallot",
+    functionName: "getNumProposals",
+  })
+
+  const { data: getProposal } = useScaffoldContractRead({
+    contractName: "FanBallot",
+    functionName: "getProposal",
+    args: [BigInt(0)],
+  })
+
+/* const {data: proposals} = useScaffoldContractRead({
+  contractName: "FanBallot",
+  functionName: "proposals"
+}) */
+
+/* const { data: yourContract } = useScaffoldContract({
+  contractName: "FanBallot",
+}); */
+// Returns the greeting and can be called in any function, unlike useScaffoldContractRead
+//var proposals = await yourContract?.proposals;
+
 
   return (
     <>
@@ -21,6 +51,17 @@ const Home: NextPage = () => {
             <p className="my-2 font-medium">Connected Address:</p>
             <Address address={connectedAddress} />
           </div>
+
+          <div className="flex justify-center items-center space-x-2">
+            <p className="my-2 font-medium">Ballot options:</p>
+            Total options: {totalCounter?.toString()}<br></br>            
+          </div>
+
+          <div className="flex justify-center items-center space-x-2">
+            <p className="my-2 font-medium"> {getProposal?.toString()}<br></br>  </p>
+                      
+          </div>
+
           <p className="text-center text-lg">
             Get started by editing{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">

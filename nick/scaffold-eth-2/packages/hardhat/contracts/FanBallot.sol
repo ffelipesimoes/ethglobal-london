@@ -5,7 +5,7 @@ pragma solidity >=0.8.0 <0.9.0;
 import "hardhat/console.sol";
 
 // Use openzeppelin to inherit battle-tested implementations (ERC20, ERC721, etc)
-// import "@openzeppelin/contracts/access/Ownable.sol";
+//import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * A smart contract for voting with chili fan tokens
@@ -118,6 +118,20 @@ contract FanBallot {
             }
         }
     }
+
+	function getNumProposals() public view
+			returns (uint numproposals)
+	{
+		return proposals.length;
+	}
+
+
+	function getProposal(uint index) external view
+		returns (bytes32 proposalName_)
+	{
+		proposalName_ = proposals[index].name;
+	}
+
 
 
     // Calls winningProposal() function to get the index
