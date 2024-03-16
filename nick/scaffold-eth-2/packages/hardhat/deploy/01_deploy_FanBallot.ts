@@ -2,9 +2,6 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { Contract } from "ethers";
 
-import { encodeBytes32String } from "ethers" ;
-
-
 /**
  * Deploys a contract named "FanBallot" using the deployer account and
  * constructor arguments set to the deployer address
