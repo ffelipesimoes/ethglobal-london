@@ -20,9 +20,6 @@ export default function CommunityCard({ name, description, members, image }: Fan
   const { primaryWallet } = useDynamicContext();
 
 
-    if(primaryWallet) {
-      console.log(primaryWallet)
-    }
 
 
   return (
