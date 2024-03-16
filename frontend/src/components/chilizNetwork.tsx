@@ -1,20 +1,5 @@
 export const chilizWallet = [
   // Existing networks (Ethereum Mainnet, Goerli, Polygon, etc.)
-  {
-    blockExplorerUrls: ['https://etherscan.io/'],
-    chainId: 1,
-    chainName: 'Ethereum Mainnet',
-    iconUrls: ['https://app.dynamic.xyz/assets/networks/eth.svg'],
-    name: 'Ethereum',
-    nativeCurrency: {
-      decimals: 18,
-      name: 'Ether',
-      symbol: 'ETH',
-    },
-    networkId: 1,
-    rpcUrls: ['https://mainnet.infura.io/v3/'],
-    vanityName: 'ETH Mainnet',
-  },
   // Other predefined networks...
   // Chiliz Spicy Testnet configuration
   {
