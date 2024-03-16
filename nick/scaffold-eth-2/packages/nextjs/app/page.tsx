@@ -8,6 +8,7 @@ import { Address } from "~~/components/scaffold-eth";
 
 import { useContractRead,usePrepareContractWrite, useContractWrite  } from "wagmi"
 import { useScaffoldContractRead , useScaffoldContract} from "~~/hooks/scaffold-eth";
+import { Ether } from "@uniswap/sdk-core";
 
 
 const Home: NextPage = () => {
@@ -38,7 +39,6 @@ const Home: NextPage = () => {
 // Returns the greeting and can be called in any function, unlike useScaffoldContractRead
 //var proposals = await yourContract?.proposals;
 
-
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
@@ -58,7 +58,8 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex justify-center items-center space-x-2">
-            <p className="my-2 font-medium"> {getProposal?.toString()}<br></br>  </p>
+            <p className="my-2 font-medium"> 
+            {getProposal?.toString()}<br></br>  </p>
                       
           </div>
 
