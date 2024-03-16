@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Test.sol";
-import "../src/FanTokenBuilder.sol";
+import {Test} from "forge-std/Test.sol";
+import {FanTokenBuilder} from "../src/FanTokenBuilder.sol";
 
 contract FanTokenBuilderTest is Test {
     FanTokenBuilder public token;
