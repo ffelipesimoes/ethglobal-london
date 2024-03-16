@@ -80,7 +80,10 @@ export default function Page() {
   return (
     <div>
       <Menu />
-      <p>My tokens</p>
+      <div className="flex flex-col items-center my-8">
+
+      <p className="text-2xl mb-4">Token List</p>
+      </div>
       {loading && <p>Loading tokens...</p>}
       {error && <p>Error: {error}</p>}
       <div>
