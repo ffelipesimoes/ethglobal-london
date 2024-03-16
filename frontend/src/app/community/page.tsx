@@ -1,10 +1,10 @@
 import  Community from '@/components/CommunityPage';
 import React from 'react';
 
-const About = () => {
+const Page = () => {
     return (
         <Community />
     );
 };
 
-export default About;
+export default Page;
