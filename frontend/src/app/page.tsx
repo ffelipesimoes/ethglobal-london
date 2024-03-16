@@ -4,6 +4,9 @@ import SearchSection from "@/components/Search";
 import { fanTokens } from "@/lib/mocks/cards";
 
 export default function Home() {
+
+
+
   return (
     <div>
 
