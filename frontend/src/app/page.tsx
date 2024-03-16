@@ -1,7 +1,10 @@
+"use client"
 import CommunityCard from "@/components/CommunityCard";
 import Menu from "@/components/Menu";
 import SearchSection from "@/components/Search";
 import { fanTokens } from "@/lib/mocks/cards";
+import { fetchTokenSymbols } from "@/lib/reader";
+import { useState } from "react";
 
 export default function Home() {
   const [walletAddress, setWalletAddress] = useState("");
@@ -36,7 +39,6 @@ export default function Home() {
       ))}
     </div>
 
-      
     </div>
   );
 }
