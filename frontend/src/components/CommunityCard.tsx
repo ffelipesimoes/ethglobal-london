@@ -1,6 +1,10 @@
+"use client"
+
 import * as React from 'react';
 import Image from 'next/image';
 import { Card } from './ui/card';
+
+import { useDynamicContext } from '../lib/dynamic';
 
 type FanToken = {
   id: string;
@@ -12,6 +16,15 @@ type FanToken = {
 
 // Modifique o componente para aceitar props
 export default function CommunityCard({ name, description, members, image }: FanToken) {
+
+  const { primaryWallet } = useDynamicContext();
+
+
+    if(primaryWallet) {
+      console.log(primaryWallet)
+    }
+
+
   return (
     <Card className="max-w-sm mx-auto bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
       <div className="p-4">
