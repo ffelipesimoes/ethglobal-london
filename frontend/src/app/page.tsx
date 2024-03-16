@@ -5,8 +5,6 @@ import { fanTokens } from "@/lib/mocks/cards";
 
 export default function Home() {
   return (
-    
-
     <div>
 
     <Menu />
