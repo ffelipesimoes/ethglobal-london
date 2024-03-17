@@ -339,14 +339,14 @@ const deployedContracts = {
   },
   88882: {
     FanBallot: {
-      address: "0xb0A6206F0401BF7786B5775225930047c46782ED",
+      address: "0x6FB4e9092D67f04380a1DcD7aFD5D09ee79cf0DF",
       abi: [
         {
           inputs: [
             {
-              internalType: "bytes32[]",
+              internalType: "string[]",
               name: "proposalNames",
-              type: "bytes32[]",
+              type: "string[]",
             },
           ],
           stateMutability: "nonpayable",
@@ -389,9 +389,9 @@ const deployedContracts = {
           name: "getProposal",
           outputs: [
             {
-              internalType: "bytes32",
+              internalType: "string",
               name: "proposalName_",
-              type: "bytes32",
+              type: "string",
             },
           ],
           stateMutability: "view",
@@ -408,9 +408,9 @@ const deployedContracts = {
           name: "proposals",
           outputs: [
             {
-              internalType: "bytes32",
+              internalType: "string",
               name: "name",
-              type: "bytes32",
+              type: "string",
             },
             {
               internalType: "uint256",
@@ -463,9 +463,9 @@ const deployedContracts = {
           name: "winnerName",
           outputs: [
             {
-              internalType: "bytes32",
+              internalType: "string",
               name: "winnerName_",
-              type: "bytes32",
+              type: "string",
             },
           ],
           stateMutability: "view",
@@ -482,6 +482,44 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    FanBallotFactory: {
+      address: "0xb17C14d694D8Ec89BBA546066C7053503393fAB7",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "deployedContract",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "creator",
+              type: "address",
+            },
+          ],
+          name: "NewFanBallotDeployed",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string[]",
+              name: "proposalNames",
+              type: "string[]",
+            },
+          ],
+          name: "deployFanBallot",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
       ],
