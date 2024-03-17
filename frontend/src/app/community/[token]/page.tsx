@@ -10,6 +10,8 @@ import Menu from '@/components/Menu';
 import Feed from '@/components/feed';
 import { Locking } from '@/components/locking';
 import { Unlocking } from '@/components/unlocking';
+import ProposalCard from '@/components/ProposalCard';
+import proposals from '@/lib/mocks/proposals';
 
 
 interface CommunityProps {
