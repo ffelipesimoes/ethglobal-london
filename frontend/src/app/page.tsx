@@ -1,8 +1,11 @@
 "use client"
 import CommunityCard from "@/components/CommunityCard";
+import FileUploadToIPFS from "@/components/Ipfs";
 import Menu from "@/components/Menu";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { fanTokens } from "@/lib/mocks/cards";
 import { useEffect, useState } from "react";
 
@@ -39,9 +42,25 @@ export default function Home() {
     <Menu />
     <div className="flex flex-col items-center my-8">
       <h2 className="text-2xl mb-4">Discover decentralised communities for fans</h2>
-      <Button variant="outline" className="mb-4">
-        Or create your own
-      </Button>
+      <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Or create your own</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Create your community</DialogTitle>
+          <DialogDescription>
+          Create a new community with IPFS
+          </DialogDescription>
+        </DialogHeader>
+        
+          <FileUploadToIPFS />
+        
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
       <div className="flex w-full max-w-md mb-4">
         <Input placeholder="Search" className="w-full" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       </div>
