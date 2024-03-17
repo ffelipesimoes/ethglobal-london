@@ -26,9 +26,9 @@ const ProposalTogether: React.FC = () => {
           // Retrieve signer
           const signer = provider.getSigner();
           // Get contract address
-          const contractAddress = '0x6FB4e9092D67f04380a1DcD7aFD5D09ee79cf0DF';
+          const contractAddress = '0x76EC75124fE4d31743db78dc2a3375923ac70cEB';
           // Create contract instance
-          const fanBallotContract = new ethers.Contract(contractAddress, FanBallot.abi, provider);
+          const fanBallotContract = new ethers.Contract(contractAddress, FanBallot.abi, await signer);
           setContract(fanBallotContract);
 
           // Get the number of proposals
@@ -93,7 +93,7 @@ const ProposalTogether: React.FC = () => {
 
         <Card className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle>Proposals</CardTitle>
+            <CardTitle>Should we build a new stadium?</CardTitle>
           </CardHeader>
           <CardContent>
             {proposals.map((proposal, index) => (
