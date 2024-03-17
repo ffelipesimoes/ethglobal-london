@@ -55,26 +55,33 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Vote for a Proposal</h1>
-      <form>
-        {proposals.map((proposal, index) => (
-          <div key={index}>
-            <input
-              type="radio"
-              id={`proposal-${index}`}
-              name="proposal"
-              value={index}
-              checked={selectedProposal === index}
-              onChange={() => setSelectedProposal(index)}
-            />
-            <label htmlFor={`proposal-${index}`}>{proposal}</label>
-          </div>
-        ))}
-        <button type="button" onClick={handleVote}>
-          Vote
-        </button>
-      </form>
+    <div className="min-h-screen bg-gray-100 py-10">
+      <div className="max-w-xl mx-auto px-4">
+        <h1 className="text-3xl font-semibold text-center text-blue-800 mb-8">Vote for a Proposal</h1>
+        <form className="bg-white shadow-md rounded-lg p-6">
+          {proposals.map((proposal, index) => (
+            <div key={index} className="flex items-center mb-4">
+              <input
+                type="radio"
+                id={`proposal-${index}`}
+                name="proposal"
+                value={index}
+                checked={selectedProposal === index}
+                onChange={() => setSelectedProposal(index)}
+                className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+              />
+              <label htmlFor={`proposal-${index}`} className="ml-2 block text-sm font-medium text-gray-700">{proposal}</label>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={handleVote}
+            className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Vote
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
