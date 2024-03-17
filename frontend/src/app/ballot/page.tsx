@@ -22,7 +22,7 @@ const Page: React.FC = () => {
           // Get contract address
           const contractAddress = '0x6FB4e9092D67f04380a1DcD7aFD5D09ee79cf0DF';
           // Create contract instance
-          const fanBallotContract = new ethers.Contract(contractAddress, FanBallot.abi, signer);
+          const fanBallotContract = new ethers.Contract(contractAddress, FanBallot.abi, provider);
           setContract(fanBallotContract);
 
           // Get the number of proposals
