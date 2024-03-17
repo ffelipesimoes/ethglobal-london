@@ -5,6 +5,7 @@ interface IPost extends Document {
   community: string;
   author: string;
   likes: number;
+  createdAt: Date;
 }
 
 const PostSchema = new Schema<IPost>({
@@ -12,6 +13,7 @@ const PostSchema = new Schema<IPost>({
   community: { type: String, default: "Barcelona", required: true },
   author: { type: String, default: "Simon", required: true },
   likes: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now, required: true },
 });
 
 // Check if the model exists before compiling it

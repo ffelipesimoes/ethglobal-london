@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -5,9 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community"; 
 import Menu from '@/components/Menu';
-import { Feed } from '@/components/feed';
-import ProposalCard from '@/components/ProposalCard';
-import proposals from '@/lib/mocks/proposals';
+import Feed from '@/components/feed';
+import { Locking } from '@/components/locking';
+import { Unlocking } from '@/components/unlocking';
+
 
 interface CommunityProps {
   name: string;
@@ -32,7 +35,6 @@ const Page = ({ params }: { params: { token: Number }}) => {
      
           <Menu/>
         <div className="max-w-4xl mx-auto my-8 p-4">
-          <h1 className="text-2xl font-bold mb-6 text-green-600">Community main page (NOT LOGGED IN)</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
               <div className="relative w-full h-60 bg-gray-200 rounded-md overflow-hidden">
@@ -68,6 +70,8 @@ const Page = ({ params }: { params: { token: Number }}) => {
               </div>
             </div>
           </div>
+          {/* <Locking /> */}
+          <Unlocking />
         </div>
         <ProposalCard proposals={proposals} />
         <Feed/>
