@@ -15,6 +15,7 @@ const ProposalTogether: React.FC = () => {
   const [newProposal, setNewProposal] = useState('');
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
+  const [hasVoted, setHasVoted] = useState<boolean>(false);
 
   // Initialize contract
   useEffect(() => {
@@ -66,8 +67,10 @@ const ProposalTogether: React.FC = () => {
         // Call the vote function on the contract
         await contract.vote(selectedProposal);
         console.log('Voted successfully!');
+        setHasVoted(true);
       } catch (error) {
         console.error('Error voting:', error);
+        setHasVoted(true);
       }
     }
   };
@@ -110,9 +113,12 @@ const ProposalTogether: React.FC = () => {
                 <label htmlFor={`proposal-${index}`} className="ml-2 block text-sm font-medium text-gray-700">{proposal}</label>
               </div>
             ))}
-            <Button onClick={handleVote} className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            {!hasVoted && (
+            <Button type="button" onClick={handleVote} className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               Vote
             </Button>
+          )}
+          {hasVoted && <p>Thank you for your vote! You vote has been recorded on chain:)</p>}
           </CardContent>
         </Card>
       </div>
