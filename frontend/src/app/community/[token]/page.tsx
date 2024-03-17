@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community"; 
 import Menu from '@/components/Menu';
+import Feed from '@/components/feed';
 
 interface CommunityProps {
   name: string;
@@ -66,6 +69,7 @@ const Page = ({ params }: { params: { token: Number }}) => {
             </div>
           </div>
         </div>
+        <Feed />
         </>
       );
 };

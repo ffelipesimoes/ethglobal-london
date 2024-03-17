@@ -14,7 +14,7 @@ type PostType = {
 };
 
 
-export function Feed() {
+export default function Feed() {
 
   const { primaryWallet } = useDynamicContext();
   const name = primaryWallet?.address;
