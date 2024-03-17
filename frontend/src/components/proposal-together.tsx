@@ -23,9 +23,7 @@ const ProposalTogether: React.FC = () => {
       if (typeof window.ethereum !== 'undefined') { // Ensure window.ethereum is available
         try {
           // Connect to Ethereum provider
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          // Retrieve signer
-          const signer = provider.getSigner();
+          const provider = new ethers.providers.Web3Provider(window.ethereum);          const signer = provider.getSigner();
           // Get contract address
           const contractAddress = '0x76EC75124fE4d31743db78dc2a3375923ac70cEB';
           // Create contract instance

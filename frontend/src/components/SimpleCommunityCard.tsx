@@ -23,7 +23,7 @@ export default function SimpleCommunityCard(props: FanToken) {
     <Card className="max-w-sm mx-auto bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
       <div className="p-4">
         <div className="flex justify-center">
-          <Image src={image} alt={`${name}`} className="rounded-full" width={64} height={64} />
+          <Image src={image || "/stadium.jpg"} alt={`${name}`} className="rounded-full" width={64} height={64} />
         </div>
         <h5 className="mt-4 text-xl font-semibold text-center text-gray-900">
           {name} ({symbol})
