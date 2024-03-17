@@ -5,19 +5,27 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import FanBallot from './contracts/FanBallot.json'; // Import your contract ABI
+import { BrowserProvider } from "ethers";
+
 
 const Page: React.FC = () => {
   const [contract, setContract] = useState<any>(null);
   const [proposals, setProposals] = useState<string[]>([]);
   const [selectedProposal, setSelectedProposal] = useState<number | null>(null);
+  const [provider, setProvider] = useState<BrowserProvider | undefined>(undefined);
+
+
 
   useEffect(() => {
     const init = async () => {
       if (typeof window.ethereum !== 'undefined') { // Ensure window.ethereum is available
         try {
+          const browserProvider = new BrowserProvider(window.ethereum);
+          setProvider(browserProvider);
+
           // Connect to Ethereum provider
-          const provider = new ethers.providers.Web3Provider(window.ethereum);          // Retrieve signer
-          const signer = provider.getSigner();
+          // const provider = new ethers.providers.Web3Provider(window.ethereum);          // Retrieve signer
+          const signer = provider?.getSigner();
           // Get contract address
           const contractAddress = '0x6FB4e9092D67f04380a1DcD7aFD5D09ee79cf0DF';
           // Create contract instance
