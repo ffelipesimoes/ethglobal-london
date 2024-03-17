@@ -11,6 +11,7 @@ import Feed from '@/components/feed';
 import { Locking } from '@/components/locking';
 import { Unlocking } from '@/components/unlocking';
 
+
 interface CommunityProps {
   name: string;
   membersCount: number;
@@ -72,8 +73,8 @@ const Page = ({ params }: { params: { token: Number }}) => {
           {/* <Locking /> */}
           <Unlocking />
         </div>
-        
-        <Feed />
+        <ProposalCard proposals={proposals} />
+        <Feed/>
         </>
       );
 };

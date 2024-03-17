@@ -21,5 +21,3 @@ const SearchSection = () => {
     </div>
   );
 };
-
-export default SearchSection;
