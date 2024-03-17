@@ -41,10 +41,22 @@ const FileUploadToIPFS = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
   <div className="p-6 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <div className="text-center mb-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Upload to IPFS</h1>
+    <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Create a new community with IPFS</h5>
+    
+    {/* Name input */}
+    <div className="mb-3">
+      <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
+      <input type="text" id="name" required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
     </div>
-    <div className="flex flex-col items-center justify-center space-y-4">
+
+    {/* Symbol input with max length of 3 */}
+    <div className="mb-3">
+      <label htmlFor="symbol" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Symbol:</label>
+      <input type="text" id="symbol" pattern="[A-Za-z]{1,3}" required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxLength={3} />
+    </div>
+
+    {/* File input */}
+    <div className="mb-3">
       <input 
         type="file" 
         onChange={handleFileChange} 
@@ -55,6 +67,10 @@ const FileUploadToIPFS = () => {
                    file:bg-violet-50 file:text-violet-700
                    hover:file:bg-violet-100"
       />
+    </div>
+    
+    {/* Submit button */}
+    <div>
       <button 
         type="submit" 
         className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-violet-700 rounded-lg hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800">
@@ -63,8 +79,6 @@ const FileUploadToIPFS = () => {
     </div>
   </div>
 </form>
-
-
   );
 };
 
