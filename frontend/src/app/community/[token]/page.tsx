@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community"; 
 import Menu from '@/components/Menu';
+import { Feed } from '@/components/feed';
+import ProposalCard from '@/components/ProposalCard';
+import proposals from '@/lib/mocks/proposals';
 
 interface CommunityProps {
   name: string;
@@ -66,6 +69,8 @@ const Page = ({ params }: { params: { token: Number }}) => {
             </div>
           </div>
         </div>
+        <ProposalCard proposals={proposals} />
+        <Feed/>
         </>
       );
 };
