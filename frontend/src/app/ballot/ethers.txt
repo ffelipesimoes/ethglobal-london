@@ -152,6 +152,18 @@
 ]
 
 
+const contraddr = '0x4DB64FB220c78007B1bB27BBcb51a7f28FdE3058'
+
+const ballotContract = new ethers.Contract(contraddr, abi, provider);
+
+const numProposals = await ballotContract.getNumProposals();
+
+for (let i = 0; i < numProposals; i++) {
+    const proposalName = await ballotContract.getProposal(i);
+    console.log(proposalName);
+}
+
+
 const contraddr = '0x6FB4e9092D67f04380a1DcD7aFD5D09ee79cf0DF'
 
 const ballotContract = new ethers.Contract(contraddr, abi, provider);
@@ -160,6 +172,23 @@ const numProposals = await ballotContract.getNumProposals();
 
 for (let i = 0; i < numProposals; i++) {
     const proposalName = await ballotContract.getProposal(i);
+    console.log(proposalName);
+}
+
+
+
+
+
+
+//yes no proposal
+
+contraddryesno2 = 0x76EC75124fE4d31743db78dc2a3375923ac70cEB 
+const ballotContractyesno2 = new ethers.Contract(contraddryesno2, abi, provider);
+
+const numProposalsyesno2 = await ballotContractyesno2.getNumProposals();
+
+for (let i = 0; i < numProposalsyesno2; i++) {
+    const proposalName = await ballotContractyesno2.getProposal(i);
     console.log(proposalName);
 }
 
