@@ -1,48 +1,70 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Test} from "forge-std/Test.sol";
-import {FanTokenBuilder} from "../src/FanTokenBuilder.sol";
+import "forge-std/Test.sol";
+import "../src/FanTokenBuilder.sol"; 
 
 contract FanTokenBuilderTest is Test {
-    FanTokenBuilder public token;
+    FanTokenBuilder public fanTokenBuilder;
     address public owner;
 
     function setUp() public {
-        owner = address(this);
-        token = new FanTokenBuilder("ACMailandToken", "ACM", "filecoin_reference_cid");
+        owner = vm.addr(1);
+        vm.startPrank(owner);
+        fanTokenBuilder = new FanTokenBuilder();
+        vm.stopPrank();
     }
 
-    function testConstructor() public {
-        // Check that the token name, symbol, and filecoinReference are set correctly
-        assertEq(token.name(), "ACMailandToken");
-        assertEq(token.symbol(), "ACM");
-        assertEq(token.filecoinReference(), "filecoin_reference_cid");
+    function testCreateFanToken() public {
+        string memory name = "AC Milan Token";
+        string memory symbol = "ACM";
+        string memory ipfsHash = "initial_ipfs_hash";
+
+        // Simulate owner creating a new FanToken
+        vm.startPrank(owner);
+        address fanTokenAddress = fanTokenBuilder.createFanToken(name, symbol, ipfsHash);
+        vm.stopPrank();
+        assertTrue(fanTokenAddress != address(0));
+
+        FanToken fanToken = FanToken(fanTokenAddress);
+        assertEq(fanToken.name(), name);
+        assertEq(fanToken.symbol(), symbol);
+        assertEq(fanToken.getFilecoinReference(), ipfsHash);
     }
 
-    function testDecimals() public {
-        // Check that decimals are set to 0
-        assertEq(token.decimals(), 0);
+    function testSetIpfsHash() public {
+        string memory name = "AC Milan Token";
+        string memory symbol = "ACM";
+        string memory ipfsHash = "initial_ipfs_hash";
+        string memory newIpfsHash = "new_ipfs_hash";
+
+        // Simulate owner creating a new FanToken and setting a new IPFS hash
+        vm.startPrank(owner);
+        address fanTokenAddress = fanTokenBuilder.createFanToken(name, symbol, ipfsHash);
+        FanToken fanToken = FanToken(fanTokenAddress);
+
+        fanToken.setIpfsHash(newIpfsHash);
+        vm.stopPrank();
+
+        assertEq(fanToken.getFilecoinReference(), newIpfsHash);
     }
 
-    function testGetFilecoinReference() public {
-        // Check that the owner can get the filecoin reference
-        string memory filecoinRef = token.getFilecoinReference();
-        assertEq(filecoinRef, "filecoin_reference_cid");
-    }
+    function testFailSetIpfsHashNotOwner() public {
+        string memory name = "AC Milan Token";
+        string memory symbol = "ACM";
+        string memory ipfsHash = "initial_ipfs_hash";
 
-    function testSetFilecoinReference() public {
-        // Only owner can set the filecoin reference
-        string memory newFilecoinRef = "new_filecoin_reference_cid";
-        token.setFilecoinReference(newFilecoinRef);
+        // Owner creates the FanToken
+        vm.startPrank(owner);
+        address fanTokenAddress = fanTokenBuilder.createFanToken(name, symbol, ipfsHash);
+        vm.stopPrank();
 
-        // Verify the update
-        assertEq(token.filecoinReference(), newFilecoinRef);
-    }
+        FanToken fanToken = FanToken(fanTokenAddress);
 
-    function testFailSetFilecoinReferenceNotOwner() public {
-        // This test is expected to fail since a non-owner tries to set the filecoin reference
-        vm.prank(address(0xdead)); // Impersonate a different address
-        token.setFilecoinReference("attempted_unauthorized_update");
+        // Another user (not the owner) attempts to change the IPFS hash
+        vm.startPrank(address(0xdead));
+        vm.expectRevert("Caller is not the owner");
+        fanToken.setIpfsHash("unauthorized_update");
+        vm.stopPrank();
     }
 }
