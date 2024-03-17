@@ -15,14 +15,18 @@ interface ApiResponse {
   status: string;
 }
 
-export const fetchTokenSymbols = async (walletAddress: string): Promise<string[]> => {
+export const fetchTokenSymbols = async (walletAddress: string): Promise<any> => {
   const url = `https://spicy-explorer.chiliz.com/api?module=account&action=tokenlist&address=${walletAddress}`;
   
   try {
     const response = await axios.get<ApiResponse>(url, { headers: { accept: 'application/json' } });
     if (response.data.message === "OK") {
-      const symbols = response.data.result.map(token => token.symbol);
-      return symbols;
+      const tokens = response.data.result.map(token => ({
+        balance: token.balance,
+        symbol: token.symbol,
+        name: token.name
+      }));
+      return tokens;
     } else {
       console.error('Error fetching token symbols:', response.data.message);
       return [];
@@ -34,7 +38,7 @@ export const fetchTokenSymbols = async (walletAddress: string): Promise<string[]
 };
 
 // Example usage
-const walletAddress = '0x08Ab1Ce3686cb7E616af2D3E068356B160c4c038';
+const walletAddress = '0x3501fa23Eeb457157C25d29045737D35f491A68a';
 fetchTokenSymbols(walletAddress)
-  .then(symbols => console.log('Symbols:', symbols))
+  .then(tokens => console.log('tokens:', tokens))
   .catch(error => console.error(error));

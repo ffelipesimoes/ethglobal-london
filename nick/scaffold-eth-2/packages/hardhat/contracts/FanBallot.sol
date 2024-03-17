@@ -4,6 +4,7 @@ pragma solidity >=0.8.0 <0.9.0;
 // Useful for debugging. Remove when deploying to a live network.
 import "hardhat/console.sol";
 
+
 // Use openzeppelin to inherit battle-tested implementations (ERC20, ERC721, etc)
 //import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -23,7 +24,7 @@ contract FanBallot {
 
     // This is a type for a single proposal.
     struct Proposal {
-        bytes32 name;   // short name (up to 32 bytes)
+        string name;   // short name (up to 32 bytes)
         uint voteCount; // number of accumulated votes
     }
 
@@ -37,7 +38,7 @@ contract FanBallot {
     Proposal[] public proposals;
 
     /// Create a new ballot to choose one of `proposalNames`.
-    constructor(bytes32[] memory proposalNames) {
+    constructor(string[] memory proposalNames) {
         chairperson = msg.sender;
 
         // For each of the provided proposal names,
@@ -127,7 +128,7 @@ contract FanBallot {
 
 
 	function getProposal(uint index) external view
-		returns (bytes32 proposalName_)
+		returns (string memory proposalName_)
 	{
 		proposalName_ = proposals[index].name;
 	}
@@ -138,7 +139,7 @@ contract FanBallot {
     // of the winner contained in the proposals array and then
     // returns the name of the winner
     function winnerName() external view
-            returns (bytes32 winnerName_)
+            returns (string memory winnerName_)
     {
         winnerName_ = proposals[winningProposal()].name;
     }

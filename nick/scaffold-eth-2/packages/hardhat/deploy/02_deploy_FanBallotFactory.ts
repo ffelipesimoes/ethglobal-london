@@ -2,13 +2,16 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { Contract } from "ethers";
 
+import { encodeBytes32String } from "ethers" ;
+
+
 /**
- * Deploys a contract named "FanBallot" using the deployer account and
+ * Deploys a contract named "FanBallotFactory" using the deployer account and
  * constructor arguments set to the deployer address
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployFanBallot: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployFanBallotFactory: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -22,15 +25,11 @@ const deployFanBallot: DeployFunction = async function (hre: HardhatRuntimeEnvir
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-// use ethers.utils.formatBytes32String
-  var questions = ["Messi" , "CR7", "R9"]
-  //var questions = ["Messi", "Ronaldo CR7", "Ronaldo R9", "Pele", "Maradona"] ;
-
-  await deploy("FanBallot", {
+  await deploy("FanBallotFactory", {
     from: deployer,
     // Contract constructor arguments
 
-    args: [ questions ],
+    args: [ ],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
@@ -38,12 +37,12 @@ const deployFanBallot: DeployFunction = async function (hre: HardhatRuntimeEnvir
   });
 
   // Get the deployed contract to interact with it after deploying.
-  const FanBallot = await hre.ethers.getContract<Contract>("FanBallot", deployer);
-  //console.log("👋 Initial greeting:", await FanBallot.greeting());
+  const FanBallotFactory = await hre.ethers.getContract<Contract>("FanBallotFactory", deployer);
+  //console.log("👋 Initial greeting:", await FanBallotFactory.greeting());
 };
 
-export default deployFanBallot;
+export default deployFanBallotFactory;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
-// e.g. yarn deploy --tags FanBallot
-deployFanBallot.tags = ["FanBallot"];
+// e.g. yarn deploy --tags FanBallotFactory
+deployFanBallotFactory.tags = ["FanBallotFactory"];
