@@ -12,6 +12,9 @@ import { Locking } from '@/components/locking';
 import { Unlocking } from '@/components/unlocking';
 import ProposalCard from '@/components/ProposalCard';
 import proposals from '@/lib/mocks/proposals';
+import { Proposal } from '@/components/proposal';
+import { ProposalSingle } from '@/components/proposal-single';
+import  ProposalTogether  from '@/components/proposal-together';
 
 
 interface CommunityProps {
@@ -72,10 +75,10 @@ const Page = ({ params }: { params: { token: Number }}) => {
               </div>
             </div>
           </div>
-          {/* <Locking /> */}
-          <Unlocking />
+          <Locking />
+          {/* <Unlocking /> */}
         </div>
-        <ProposalCard proposals={proposals} />
+        <ProposalTogether />
         <Feed/>
         </>
       );
