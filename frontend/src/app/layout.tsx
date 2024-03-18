@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { DynamicContextProvider } from "./../lib/dynamic";
 import { EthereumWalletConnectors } from "./../lib/dynamic";
-import { chilizWallet } from "@/components/chilizNetwork"
+import { chilizWallet } from "@/lib/networks"
 
 const inter = Inter({ subsets: ["latin"] });
 
