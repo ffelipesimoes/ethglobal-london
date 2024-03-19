@@ -18,11 +18,12 @@ contract FanBallot {
         uint voteCount; // number of accumulated votes
     }
 
+    string public proposalTitle;
     mapping(address => Voter) public voters;
     Proposal[] public proposals;
 
     // The constructor now takes an additional argument for the lock contract address.
-    constructor(string[] memory proposalNames, address _lockContractAddress) {
+    constructor(string memory proposalTitle_, string[] memory proposalNames, address _lockContractAddress) {
         require(_lockContractAddress != address(0), "Lock contract address cannot be the zero address.");
         lockContract = ILock(_lockContractAddress);
 
@@ -32,6 +33,7 @@ contract FanBallot {
                 voteCount: 0
             }));
         }
+        proposalTitle = proposalTitle_;
     }
 
     // Allows a user to vote on a proposal, with their vote's weight determined by the amount of time their tokens have been locked.
@@ -82,8 +84,8 @@ contract FanBallotFactory {
 
     // Deploys a new FanBallot contract with the provided proposal names and lock contract address.
     // Emits an event upon successful deployment.
-    function deployFanBallot(string[] memory proposalNames, address _lockContractAddress) external {
-        FanBallot newContract = new FanBallot(proposalNames, _lockContractAddress);
+    function deployFanBallot(string memory proposalTitle_, string[] memory proposalNames, address _lockContractAddress) external {
+        FanBallot newContract = new FanBallot(proposalTitle_, proposalNames, _lockContractAddress);
         emit NewFanBallotDeployed(address(newContract), msg.sender);
     }
 }
