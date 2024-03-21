@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export default function Locking() {
+const Locking = () => {
   return (
     <div className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
       <div className="flex flex-col items-center justify-center space-y-4">
@@ -11,4 +11,6 @@ export default function Locking() {
       </div>
     </div>
   );
-}
+};
+
+export default Locking;
