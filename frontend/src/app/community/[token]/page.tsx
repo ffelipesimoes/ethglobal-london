@@ -7,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community";
 import Menu from "@/components/Menu";
-import Locking from "@/components/Locking";
-import Feed from "@/components/Feed";
+import Lock from "@/components/Lock";
+import Chat from "@/components/Chat";
 
 import ProposalTogether from "@/components/ProposalTogether";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
@@ -44,7 +44,7 @@ const Page = ({ params }: { params: { token: number } }) => {
               <h3 className="text-lg font-semibold mt-2">{tokenData!.name}</h3>
               <p className="text-sm text-gray-500">Members: {tokenData!.membersCount.toLocaleString()}</p>
             </div>
-            {walletAddress && <Locking />}
+            {walletAddress && <Lock />}
 
             {!walletAddress && (
               <div className="flex flex-col space-y-4">
@@ -65,7 +65,7 @@ const Page = ({ params }: { params: { token: number } }) => {
         {/* <Unlocking /> */}
       </div>
       <ProposalTogether />
-      <Feed />
+      <Chat />
     </>
   );
 };

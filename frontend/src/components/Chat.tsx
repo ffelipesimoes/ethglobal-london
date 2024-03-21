@@ -13,7 +13,7 @@ type PostType = {
   likes: number;
 };
 
-export default function Feed() {
+export default function Chat() {
   const { primaryWallet } = useDynamicContext();
   const name = primaryWallet?.address;
   const [postText, setPostText] = useState("");
