@@ -5,6 +5,7 @@ import SimpleCommunityCard from "@/components/SimpleCommunityCard";
 import Menu from "@/components/Menu";
 import { fanTokens } from "@/lib/mocks/cards";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { Suspense } from "react";
 
 interface TokenProps {
   name: string;
@@ -69,13 +70,15 @@ export default function Page() {
       {loading && <p>Loading tokens...</p>}
       {error && <p>Error: {error}</p>}
       <div>
-        {tokens.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {tokens.map((token, index) => (
-              <SimpleCommunityCard key={index} {...token} />
-            ))}
-          </div>
-        )}
+        <Suspense>
+          {tokens.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {tokens.map((token, index) => (
+                <SimpleCommunityCard key={index} {...token} />
+              ))}
+            </div>
+          )}
+        </Suspense>
       </div>
     </div>
   );
