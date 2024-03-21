@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export function Unlocking() {
+export function Unlock() {
   return (
     <div className="max-w-xs mx-auto p-6 bg-white rounded-lg shadow-md flex flex-col items-center">
       <div className="flex items-center space-x-4">
