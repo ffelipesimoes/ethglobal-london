@@ -7,13 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community";
 import Menu from "@/components/Menu";
-import Feed from "@/components/feed";
-import { Locking } from "@/components/locking";
+import Feed from "@/components/Feed";
+import { Locking } from "@/components/Locking";
 
 import ProposalTogether from "@/components/ProposalTogether";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 const Page = ({ params }: { params: { token: number } }) => {
   const tokenData = communityData.find((community) => community.id === Number(params.token));
+
+  const { primaryWallet: walletAddress } = useDynamicContext();
 
   if (!tokenData) {
     return <div>Community not found</div>;
@@ -41,21 +44,24 @@ const Page = ({ params }: { params: { token: number } }) => {
               <h3 className="text-lg font-semibold mt-2">{tokenData!.name}</h3>
               <p className="text-sm text-gray-500">Members: {tokenData!.membersCount.toLocaleString()}</p>
             </div>
-            <div className="flex flex-col space-y-4">
-              <Button className="w-full">Connect Wallet</Button>
-              <p className="text-sm text-gray-500 text-center">
-                {tokenData!.tokenRequirement}
-                <br />
-                If you dont have them — buy them
-                <Link href={tokenData!.buyTokenLink} className="text-blue-500 hover:text-blue-600">
-                  {" "}
-                  here
-                </Link>
-              </p>
-            </div>
+            {walletAddress && <Locking />}
+
+            {!walletAddress && (
+              <div className="flex flex-col space-y-4">
+                <Button className="w-full">Connect Wallet</Button>
+                <p className="text-sm text-gray-500 text-center">
+                  {tokenData!.tokenRequirement}
+                  <br />
+                  If you dont have them — buy them
+                  <Link href={tokenData!.buyTokenLink} className="text-blue-500 hover:text-blue-600">
+                    {" "}
+                    here
+                  </Link>
+                </p>
+              </div>
+            )}
           </div>
         </div>
-        <Locking />
         {/* <Unlocking /> */}
       </div>
       <ProposalTogether />

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { DynamicContextProvider } from "./../lib/dynamic";
 import { EthereumWalletConnectors } from "./../lib/dynamic";
-import { chilizWallet } from "@/lib/networks"
+import { chilizWallet } from "@/lib/networks";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <DynamicContextProvider
-    settings={{ 
-      environmentId: 'b6614cc8-b338-4256-8863-c8f58d127fe1',
-      walletConnectors: [ EthereumWalletConnectors ],
-      appName: 'Stadium',
-      evmNetworks: chilizWallet,
-    }}>
-      <body className={inter.className}>{children}</body>
-    </DynamicContextProvider>
+        settings={{
+          environmentId: "b6614cc8-b338-4256-8863-c8f58d127fe1",
+          walletConnectors: [EthereumWalletConnectors],
+          appName: "Stadium",
+          evmNetworks: chilizWallet,
+        }}
+      >
+        <body className={inter.className}>{children}</body>
+      </DynamicContextProvider>
     </html>
   );
 }
