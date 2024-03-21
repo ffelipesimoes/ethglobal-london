@@ -1,12 +1,10 @@
-"use client"
-import React, { useState } from 'react';
-import { DynamicWidget, useDynamicContext } from './../lib/dynamic';
-import { fetchTokenSymbols } from '@/actions/wallet';
-
+"use client";
+import React, { useState } from "react";
+import { DynamicWidget, useDynamicContext } from "./../lib/dynamic";
+import { fetchTokenSymbols } from "@/actions/wallet";
 
 export default function Wallet() {
-
-  const { primaryWallet: walletAddress} = useDynamicContext();
+  const { primaryWallet: walletAddress } = useDynamicContext();
 
   const [symbols, setSymbols] = useState<string[]>([]);
   const [error, setError] = useState("");
@@ -30,7 +28,6 @@ export default function Wallet() {
   return (
     <div className="flex justify-between items-center p-2 border-b border-gray-300">
       <DynamicWidget />
-
     </div>
   );
-};
+}
