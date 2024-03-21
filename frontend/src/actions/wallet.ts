@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 interface Token {
   balance: string;
@@ -17,28 +17,28 @@ interface ApiResponse {
 
 export const fetchTokenSymbols = async (walletAddress: string): Promise<any> => {
   const url = `https://spicy-explorer.chiliz.com/api?module=account&action=tokenlist&address=${walletAddress}`;
-  
+
   try {
-    const response = await axios.get<ApiResponse>(url, { headers: { accept: 'application/json' } });
+    const response = await axios.get<ApiResponse>(url, { headers: { accept: "application/json" } });
     if (response.data.message === "OK") {
-      const tokens = response.data.result.map(token => ({
+      const tokens = response.data.result.map((token) => ({
         balance: token.balance,
         symbol: token.symbol,
-        name: token.name
+        name: token.name,
       }));
       return tokens;
     } else {
-      console.error('Error fetching token symbols:', response.data.message);
+      console.error("Error fetching token symbols:", response.data.message);
       return [];
     }
   } catch (error) {
-    console.error('Error fetching token symbols:', error);
+    console.error("Error fetching token symbols:", error);
     return [];
   }
 };
 
 // Example usage
-const walletAddress = '0x3501fa23Eeb457157C25d29045737D35f491A68a';
+const walletAddress = "0x3501fa23Eeb457157C25d29045737D35f491A68a";
 fetchTokenSymbols(walletAddress)
-  .then(tokens => console.log('tokens:', tokens))
-  .catch(error => console.error(error));
+  .then((tokens) => console.log("tokens:", tokens))
+  .catch((error) => console.error(error));

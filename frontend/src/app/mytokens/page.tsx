@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { fetchTokenSymbols } from "@/actions/wallet";
 import SimpleCommunityCard from "@/components/SimpleCommunityCard";
@@ -22,51 +22,34 @@ interface FetchedToken {
 }
 
 export default function Page() {
-
-  const { primaryWallet: walletAddress} = useDynamicContext();
-  const [tokenList, setTokenList] = useState([]);
+  const { primaryWallet: walletAddress } = useDynamicContext();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [tokens, setTokens] = useState<TokenProps[]>([])
-
-
-  async function getTokens(walletAddress: string) {
-    try {
-      setLoading(true);
-      setError('');
-      const tokens = await fetchTokenSymbols(walletAddress);
-      setTokenList(tokens);
-    } catch (err) {
-      setError('Failed to fetch tokens.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [error, setError] = useState("");
+  const [tokens, setTokens] = useState<TokenProps[]>([]);
 
   useEffect(() => {
     if (walletAddress?.address) {
       setLoading(true);
-      setError('');
+      setError("");
 
       fetchTokenSymbols(walletAddress.address)
         .then((fetchedTokens: FetchedToken[]) => {
-          const enrichedTokens = fetchedTokens.map(token => {
-            const mockData = fanTokens.find(mock => mock.symbol === token.symbol);
+          const enrichedTokens = fetchedTokens.map((token) => {
+            const mockData = fanTokens.find((mock) => mock.symbol === token.symbol);
             return {
               name: token.name,
               symbol: token.symbol,
               balance: token.balance,
               description: mockData?.description || "No description available.",
               members: mockData?.members || 0,
-              image: mockData?.image || '/default-image.png', 
+              image: mockData?.image || "/default-image.png",
             };
           });
 
-          setTokens(enrichedTokens); 
+          setTokens(enrichedTokens);
         })
-        .catch(err => {
-          setError('Failed to fetch tokens.');
+        .catch((err) => {
+          setError("Failed to fetch tokens.");
           console.error(err);
         })
         .finally(() => {
@@ -74,27 +57,26 @@ export default function Page() {
         });
     }
   }, [walletAddress]);
-    
-    console.log(tokens)
+
+  console.log(tokens);
 
   return (
     <div>
       <Menu />
       <div className="flex flex-col items-center my-8">
-
-      <p className="text-2xl mb-4">Token List</p>
+        <p className="text-2xl mb-4">Token List</p>
       </div>
       {loading && <p>Loading tokens...</p>}
       {error && <p>Error: {error}</p>}
       <div>
-    {tokens.length > 0 && (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"> 
-       {tokens.map((token, index) => (
-    <SimpleCommunityCard key={index} {...token} />
-  ))}
+        {tokens.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {tokens.map((token, index) => (
+              <SimpleCommunityCard key={index} {...token} />
+            ))}
+          </div>
+        )}
       </div>
-    )}
-  </div>
     </div>
   );
 }
