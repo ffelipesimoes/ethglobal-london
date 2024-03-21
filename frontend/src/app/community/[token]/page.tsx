@@ -10,7 +10,7 @@ import Menu from "@/components/Menu";
 import Feed from "@/components/feed";
 import { Locking } from "@/components/locking";
 
-import ProposalTogether from "@/components/proposal-together";
+import ProposalTogether from "@/components/ProposalTogether";
 
 const Page = ({ params }: { params: { token: number } }) => {
   const tokenData = communityData.find((community) => community.id === Number(params.token));
