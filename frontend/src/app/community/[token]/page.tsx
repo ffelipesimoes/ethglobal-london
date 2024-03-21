@@ -7,11 +7,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { communityData } from "@/lib/mocks/community";
 import Menu from "@/components/Menu";
-import Feed from "@/components/Feed";
-import { Locking } from "@/components/Locking";
 
 import ProposalTogether from "@/components/ProposalTogether";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { Locking } from "@/components/Locking";
+import Feed from "@/components/Feed";
 
 const Page = ({ params }: { params: { token: number } }) => {
   const tokenData = communityData.find((community) => community.id === Number(params.token));
