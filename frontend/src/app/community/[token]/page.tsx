@@ -10,7 +10,7 @@ import Menu from "@/components/Menu";
 
 import ProposalTogether from "@/components/ProposalTogether";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
-import { Locking } from "@/components/Locking";
+import Locking from "@/components/Locking";
 import Feed from "@/components/Feed";
 
 const Page = ({ params }: { params: { token: number } }) => {
